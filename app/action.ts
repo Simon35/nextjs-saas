@@ -140,3 +140,20 @@ export async function getInvoicesByEmail(email: string) {
         console.error(error)
     }
 }
+
+export async function getInvoiceById(invoiceId: string) {
+    try {
+        const invoice = await prisma.invoice.findUnique({
+            where: { id: invoiceId },
+            include: {
+                lines: true
+            }
+        })
+        if (!invoice) {
+            throw new Error("Facture non trouvée.");
+        }
+        return invoice
+    } catch (error) {
+        console.error(error)
+    }
+}
