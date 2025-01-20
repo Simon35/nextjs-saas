@@ -16,7 +16,7 @@ const VATControl : React.FC<Props> = ({ invoice, setInvoice }) => {
         })
     }
 
-    const handleVatRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleVatRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInvoice({
             ...invoice,
             vatRate: parseFloat(e.target.value)
@@ -40,6 +40,7 @@ const VATControl : React.FC<Props> = ({ invoice, setInvoice }) => {
             value={invoice.vatRate}
             className='input input-sm input-bordered w-16 ml-2'
             onChange={handleVatRateChange}
+            // la tva est entier positif
             min={0}
         />
     )}
