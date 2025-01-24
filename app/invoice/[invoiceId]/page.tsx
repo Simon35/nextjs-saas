@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import { getInvoiceById, updateInvoice } from "@/app/action";
+import { deleteInvoice, getInvoiceById, updateInvoice } from "@/app/action";
 import InvoiceInfo from "@/app/components/InvoiceInfo";
 import InvoiceLines from "@/app/components/InvoiceLines";
 import VATControl from "@/app/components/VATControl";
 import Wrapper from "@/app/components/Wrapper";
 import { Invoice, Totals } from "@/type";
 import { Save, Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 // on va récupérer l'id
@@ -20,6 +22,9 @@ const page = ({ params }: { params: Promise<{ invoiceId: string }> }) => {
   // btn sauvegarder, par défaut désactivé
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  // redirection après suppression
+  const router = useRouter();
 
   const fetchInvoice = async () => {
     try {
@@ -82,6 +87,20 @@ const page = ({ params }: { params: Promise<{ invoiceId: string }> }) => {
     }
   };
 
+  const handleDelete = async () => {
+    const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette facture ?")
+
+    if (confirmed) {
+      try {
+        await deleteInvoice(invoice?.id as string)
+        router.push("/")
+      } catch (error) {
+        console.error("Erreur lors de la suppression de la facture.", error);
+      }
+    }
+  }
+
+
   // si pas de facture ou pas de totaux
   if (!invoice || !totals)
     return (
@@ -124,6 +143,11 @@ const page = ({ params }: { params: Promise<{ invoiceId: string }> }) => {
                 </>
               )}
               Sauvegarder
+            </button>
+            <button
+              onClick={handleDelete}
+              className='btn btn-sm btn-accent ml-4'>
+              <Trash className='w-4' />
             </button>
           </div>
         </div>

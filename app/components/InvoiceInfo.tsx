@@ -31,7 +31,7 @@ const InvoiceInfo: React.FC<Props> = ({ invoice, setInvoice }) => {
                     value={invoice?.issuerAddress}
                     placeholder="Adresse de l'entreprise émettrice"
                     className='textarea textarea-bordered w-full resize-none h-40'
-                    aria-rowcount={5}
+                    //aria-rowcount={5}
                     required
                     onChange={(e) => handleInputChange(e , 'issuerAddress')}
                 >
@@ -51,7 +51,7 @@ const InvoiceInfo: React.FC<Props> = ({ invoice, setInvoice }) => {
                     value={invoice?.clientAddress}
                     placeholder="Adresse de l'entreprise cliente"
                     className='textarea textarea-bordered w-full resize-none h-40'
-                    aria-rowcount={5}
+                    //aria-rowcount={5}
                     required
                     onChange={(e) => handleInputChange(e , 'clientAddress')}
                 >
@@ -66,7 +66,7 @@ const InvoiceInfo: React.FC<Props> = ({ invoice, setInvoice }) => {
                     onChange={(e) => handleInputChange(e , 'invoiceDate')}
                 />
 
-                <h2 className='badge badge-accent'>Date d'échéance</h2>
+                <h2 className='badge badge-accent'>Date déchéance</h2>
                 <input
                     type="date"
                     value={invoice?.dueDate}

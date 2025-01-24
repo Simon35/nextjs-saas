@@ -58,7 +58,7 @@ export async function createEmptyInvoice(email: string, name: string) {
         const invoiceId = await generateUniqueId() as string
 
         if (user) {
-            const newInvoice = await prisma.invoice.create({
+            await prisma.invoice.create({
                 data: {
                     id: invoiceId,
                     name: name,
@@ -234,6 +234,19 @@ export async function updateInvoice(invoice:Invoice) {
                     }
                 })
             }
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function deleteInvoice(invoiceId: string) {
+    try {
+        const deleteInvoice = await prisma.invoice.delete({
+            where: { id: invoiceId }
+        })
+        if (!deleteInvoice) {
+            throw new Error("Erreur lors de la suppression de la facture.");
         }
     } catch (error) {
         console.error(error)

@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import Wrapper from "./components/Wrapper";
 import { Layers } from "lucide-react";
 import { useEffect, useState } from "react";
