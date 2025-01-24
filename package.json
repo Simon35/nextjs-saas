@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.9",
@@ -15,9 +16,7 @@
     "lucide-react": "^0.471.0",
     "next": "15.1.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
-
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
